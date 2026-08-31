@@ -1,0 +1,118 @@
+body {
+    font-family: sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+/* --- Nav (wie tag2_p1) --- */
+nav {
+    display: flex;
+    gap: 0.5rem;
+    background: #2b2d42;
+    padding: 0.75rem 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+}
+
+nav a:hover  { background: #4f5d75; }
+nav a.active { background: #ef6461; }
+
+/* --- Mittiger Inhaltsbereich --- */
+main {
+    max-width: 640px;
+    margin: 2rem auto 3rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 8px;
+}
+
+h1 {
+    color: darkorange;
+    margin: 0 0 1rem;
+}
+
+h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    font-size: 0.85rem;
+    padding: 1rem;
+}
+
+/* --- Kurs-Karten auf /kurse --- */
+.card {
+    border: 1px solid #ddd;
+    border-left: 4px solid darkorange;
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.card p { margin: 0; color: #555; }
+
+/* --- Formular /anmeldung: Felder untereinander, Breite gleich --- */
+form label {
+    display: block;
+    margin: 1rem 0 0.25rem;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font: inherit;
+}
+
+/* Radio- und Checkbox-Labels liegen INLINE (Input steckt IM Label) */
+form label:has(input[type="radio"]),
+form label:has(input[type="checkbox"]) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.35rem 1rem 0.35rem 0;
+    font-weight: 400;
+}
+
+button {
+    margin-top: 1.5rem;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 4px;
+    background: darkorange;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover { background: #e67e00; }
+
+/* --- Fehler: Liste oben (steht VOR dem Formular, deshalb main > ul) + Meldung am Feld --- */
+main > ul {
+    background: #fdeeea;
+    border-left: 4px solid #b03a2e;
+    border-radius: 4px;
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    color: #b03a2e;
+}
+
+small {
+    display: block;
+    color: #b03a2e;
+    margin-top: 0.25rem;
+}

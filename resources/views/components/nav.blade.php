@@ -1,0 +1,10 @@
+<nav>
+    <x-nav-link route="home">Home</x-nav-link>
+    <x-nav-link route="courses.create">Anmeldung</x-nav-link>
+    <x-nav-link route="courses.registrations">Anmeldungen</x-nav-link>
+    <x-nav-link route="courses.index">Kurse</x-nav-link>
+
+    {{--
+    <x-nav-link route="contact">Kontakt</x-nav-link>
+    --}}
+</nav>
