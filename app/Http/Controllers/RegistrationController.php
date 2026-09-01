@@ -23,7 +23,11 @@ class RegistrationController extends Controller
     // Formular für Kursanmeldung anzeigen: GET /registrations/create (oder /registrations/join)
     public function create(): View
     {
-        return view('registrations.create', ['courses' => Course::orderBy('title')->get(), 'interests' => Interest::orderBy('title')->get()]);
+        return view('registrations.create',
+            [
+                'courses' => Course::orderBy('title')->get(),
+                'interests' => Interest::orderBy('title')->get()
+            ]);
     }
 
     // Anmeldung verarbeiten & speichern: POST /registrations
