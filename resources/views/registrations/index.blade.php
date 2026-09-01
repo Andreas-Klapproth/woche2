@@ -5,7 +5,7 @@
     @forelse($registrations as $registration)
         <h2> {{ $registration->name }} ({{ $registration->created_at->format('d.m.Y H:i') }}) </h2>
         <p>
-            Kurs: {{ $registration->kurs }}
+            Kurs: {{ $registration->course->titel }}
             Teilnahme: {{ $registration->teilnahme }}
             E-Mail: {{ $registration->email }}
         </p>

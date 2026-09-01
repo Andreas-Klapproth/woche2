@@ -45,7 +45,9 @@ footer {
     text-align: center;
     color: #777;
     font-size: 0.85rem;
-    padding: 1rem;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
 }
 
 /* --- Kurs-Karten auf /kurse --- */
@@ -115,4 +117,11 @@ small {
     display: block;
     color: #b03a2e;
     margin-top: 0.25rem;
+}
+
+.error{
+    background: #e67e00;
+    padding: 7px;
+    color: #c00;
+    font-weight: bold;
 }

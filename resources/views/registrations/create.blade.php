@@ -1,8 +1,8 @@
 <x-layouts.app title="Anmeldung">
     <h1>Kursanmeldung</h1>
 
-    {{-- Formular über die neue Named Route 'courses.store' --}}
-    <form action="{{ route('courses.store') }}" method="POST" novalidate>
+    {{-- Formular über die neue Named Route 'registrations.store' --}}
+    <form action="{{ route('registrations.store') }}" method="POST" novalidate>
         @csrf
 
         {{-- Vor- und Nachname --}}
@@ -21,16 +21,16 @@
 
         {{-- Kursauswahl --}}
         <div>
-            <label for="kurs">Kurs</label>
-            <select id="kurs" name="kurs">
+            <label for="course_id">Kurs</label>
+            <select id="course_id" name="course_id">
                 <option value="">-- bitte wählen --</option>
                 @foreach($courses as $course)
-                    <option value="{{ $course['titel'] }}" @selected(old('kurs') === $course['titel'])>
-                        {{ $course['titel'] }}
+                    <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                        {{ $course->titel }}
                     </option>
                 @endforeach
             </select>
-            <x-forms.error name="kurs"/>
+            <x-forms.error name="course_id"/>
         </div>
 
         {{-- Teilnahme --}}

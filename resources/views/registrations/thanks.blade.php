@@ -1,5 +1,6 @@
 <x-layouts.app title="danke">
 
+    
     @if(session('kurs'))
         <h1>Danke, {{ session('name') }}! </h1>
 

@@ -5,6 +5,6 @@
         <h2> {{ $course['titel'] }} </h2>
         <p> {{ $course['beschreibung'] }} </p>
     @empty
-        <p>Moment keine Kurse </p>
+        <p>Momentan keine Kurse </p>
     @endforelse
 </x-layouts.app>

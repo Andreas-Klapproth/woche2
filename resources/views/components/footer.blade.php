@@ -1,1 +1,1 @@
-<footer>© 2026 · Mein Projekt</footer>
+<footer>© 2026 · {{ config('app.name') }}</footer>
