@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registration;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CourseController extends Controller
 {
@@ -14,19 +16,19 @@ class CourseController extends Controller
     ];
 
     // Übersicht aller Kurse: GET /courses
-    public function index()
+    public function index(): View
     {
         return view('courses.index', ['courses' => $this->courses]);
     }
 
     // Formular für Kursanmeldung anzeigen: GET /courses/create (oder /courses/join)
-    public function create()
+    public function create(): View
     {
         return view('courses.create', ['courses' => $this->courses]);
     }
 
     // Anmeldung verarbeiten & speichern: POST /courses
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'min:3'],
@@ -54,15 +56,15 @@ class CourseController extends Controller
     }
 
     // Bestätigungsseite anzeigen: GET /courses/danke
-    public function thanks()
+    public function thanks(): View
     {
         return view('courses.thanks');
     }
 
     // Liste aller Anmeldungen anzeigen: GET /courses/registrations
-    public function registrations()
+    public function registrations(): View
     {
         $registrations = Registration::latest('id')->get();
-        return view('courses.registrations', ['registrations' => $registrations]);
+        return view('courses.registrations', compact('registrations'));
     }
 }
