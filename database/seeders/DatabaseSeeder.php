@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Interest;
 use App\Models\User;
 use App\Models\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -26,6 +27,12 @@ class DatabaseSeeder extends Seeder
 
         foreach ($courses as $course) {
             Course::create($course);
+        }
+
+        $interests = ['Backend', 'Frontend', 'Datenbank', 'Testing'];
+
+        foreach ($interests as $name) {
+            Interest::create(['name' => $name]);
         }
 
 
