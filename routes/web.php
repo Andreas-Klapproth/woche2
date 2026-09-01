@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InterestController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,10 @@ Route::controller(RegistrationController::class)->prefix('registrations')->as('r
 Route::controller(CourseController::class)->prefix('courses')->as('courses.')->group(function () {
 
     // Alle Kurse
+    Route::get('/', 'index')->name('index');
+});
+
+Route::controller(InterestController::class)->prefix('interests')->as('interests.')->group(function () {
+    // Alle Interessen
     Route::get('/', 'index')->name('index');
 });

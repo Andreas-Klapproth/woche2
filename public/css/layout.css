@@ -113,6 +113,14 @@ main > ul {
     color: #b03a2e;
 }
 
+.interest {
+    background: lightblue;
+    border-left: 4px solid cornflowerblue;
+    border-radius: 4px;
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    color: blue;
+}
+
 small {
     display: block;
     color: #b03a2e;
