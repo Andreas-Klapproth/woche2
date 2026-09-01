@@ -73,11 +73,11 @@
         {{-- Interessen --}}
         <div>
             <p>Interessen (Mehrfachauswahl möglich)</p>
-            @foreach(['Backend', 'Frontend', 'Datenbank', 'Testing'] as $interesse)
+            @foreach($interests as $interest)
                 <label>
-                    <input type="checkbox" name="interessen[]" value="{{ $interesse }}"
-                        @checked(in_array($interesse, old('interessen', [])))>
-                    {{ $interesse }}
+                    <input type="checkbox" name="interessen[]" value="{{ $interest->name }}"
+                        @checked(in_array($interest->name, old('interessen', [])))>
+                    {{ $interest->name }}
                 </label>
             @endforeach
             <x-forms.error name="interessen"/>
