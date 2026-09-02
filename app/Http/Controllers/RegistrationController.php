@@ -42,10 +42,16 @@ class RegistrationController extends Controller
             'startdatum' => ['nullable', 'date'],
             'bemerkung' => ['nullable', 'string', 'max:500'],
             'interessen' => ['nullable', 'array'],
+            'interessen.*' => ['exists:interests,id'],
         ]);
 
-        // Nur die in $fillable definierten Spalten des Models werden gespeichert
-        Registration::create($validated);
+
+        $registration = Registration::create($validated);
+
+
+        if (!empty($validated['interessen'])) {
+            $registration->interests()->attach($validated['interessen']);
+        }
 
         $course = Course::findOrFail($validated['course_id']);
 
@@ -56,7 +62,7 @@ class RegistrationController extends Controller
             'teilnahme' => $validated['teilnahme'],
             'startdatum' => $validated['startdatum'] ?? null,
             'bemerkung' => $validated['bemerkung'] ?? null,
-            'interessen' => $validated['interessen'] ?? [],
+            'interessen' => Interest::find($validated['interessen'] ?? [])->pluck('name'),
         ]);
     }
 

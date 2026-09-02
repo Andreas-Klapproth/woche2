@@ -1,6 +1,8 @@
 <x-layouts.app title="Anmeldung">
     <h1>Kursanmeldung</h1>
 
+    <x-forms.all-errors/>
+
     {{-- Formular über die neue Named Route 'registrations.store' --}}
     <form action="{{ route('registrations.store') }}" method="POST" novalidate>
         @csrf
@@ -75,8 +77,8 @@
             <p>Interessen (Mehrfachauswahl möglich)</p>
             @foreach($interests as $interest)
                 <label>
-                    <input type="checkbox" name="interessen[]" value="{{ $interest->name }}"
-                        @checked(in_array($interest->name, old('interessen', [])))>
+                    <input type="checkbox" name="interessen[]" value="{{ $interest->id }}"
+                        @checked(in_array($interest->id, old('interessen', [])))>
                     {{ $interest->name }}
                 </label>
             @endforeach
