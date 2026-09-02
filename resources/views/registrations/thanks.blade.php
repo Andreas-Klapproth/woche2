@@ -1,16 +1,16 @@
 <x-layouts.app title="danke">
 
-    
-    @if(session('kurs'))
+
+    @if(session('course'))
         <h1>Danke, {{ session('name') }}! </h1>
 
-        <p> Deine Anmeldung für {{ session('kurs') }} {{ session('teilnahme')  }} ist angekommen </p>
-        @if(session('interessen'))
-            <p>Interessen:{{ implode(', ', session('interessen')) }}</p>
+        <p> Deine Anmeldung für {{ session('course') }} {{ session('format')  }} ist angekommen </p>
+        @if(session('interests'))
+            <p>Interessen:{{ implode(', ', session('interests')) }}</p>
         @endif
 
-        @if(session('bemerkung'))
-            <p>Bemerkung: {{ session('bemerkung') }} </p>
+        @if(session('comment'))
+            <p>Bemerkung: {{ session('comment') }} </p>
         @endif
     @endif
 

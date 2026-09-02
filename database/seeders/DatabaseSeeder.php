@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $courses = [
-            ['titel' => 'Laravel-Basis', 'beschreibung' => 'Erste Schritte in Laravel'],
-            ['titel' => 'IT-Basics', 'beschreibung' => 'Erste Schritte am PC'],
-            ['titel' => 'Web-Basis', 'beschreibung' => 'Erste Schritte im Internet'],
+            ['title' => 'Laravel-Basis', 'description' => 'Erste Schritte in Laravel'],
+            ['title' => 'IT-Basics', 'description' => 'Erste Schritte am PC'],
+            ['title' => 'Web-Basis', 'description' => 'Erste Schritte im Internet'],
         ];
 
         foreach ($courses as $course) {

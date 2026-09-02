@@ -20,6 +20,7 @@ class RegistrationController extends Controller
         return view('registrations.index', compact('registrations'));
     }
 
+
     // Formular für Kursanmeldung anzeigen: GET /registrations/create (oder /registrations/join)
     public function create(): View
     {
@@ -37,20 +38,20 @@ class RegistrationController extends Controller
             'name' => ['required', 'string', 'min:3'],
             'email' => ['required', 'email'],
             'course_id' => ['required', 'exists:courses,id'],
-            'teilnahme' => ['required', 'in:vor_ort,online'],
-            'datenschutz' => ['accepted'],
-            'startdatum' => ['nullable', 'date'],
-            'bemerkung' => ['nullable', 'string', 'max:500'],
-            'interessen' => ['nullable', 'array'],
-            'interessen.*' => ['exists:interests,id'],
+            'format' => ['required', 'in:vor_ort,online'],
+            'gdpr' => ['accepted'],
+            'start_date' => ['nullable', 'date'],
+            'comment' => ['nullable', 'string', 'max:500'],
+            'interests' => ['nullable', 'array'],
+            'interests.*' => ['exists:interests,id'],
         ]);
 
 
         $registration = Registration::create($validated);
 
 
-        if (!empty($validated['interessen'])) {
-            $registration->interests()->attach($validated['interessen']);
+        if (!empty($validated['interests'])) {
+            $registration->interests()->attach($validated['interests']);
         }
 
         $course = Course::findOrFail($validated['course_id']);
@@ -58,12 +59,50 @@ class RegistrationController extends Controller
         return redirect()->route('registrations.thanks')->with([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'kurs' => $course->titel,
-            'teilnahme' => $validated['teilnahme'],
-            'startdatum' => $validated['startdatum'] ?? null,
-            'bemerkung' => $validated['bemerkung'] ?? null,
-            'interessen' => Interest::find($validated['interessen'] ?? [])->pluck('name'),
+            'course' => $course->title,
+            'format' => $validated['format'],
+            'start_date' => $validated['start_date'] ?? null,
+            'comment' => $validated['comment'] ?? null,
+            'interests' => Interest::find($validated['interests'] ?? [])->pluck('name'),
         ]);
+    }
+
+    public function show(Registration $registration): View
+    {
+        return view('registrations.show', compact('registration'));
+    }
+
+    public function edit(Registration $registration): View
+    {
+        $courses = Course::all();
+        $interests = Interest::all();
+        return view('registrations.edit', compact('registration', 'courses', 'interests'));
+    }
+
+    public function update(Request $request, Registration $registration): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'min:3'],
+            'email' => ['required', 'email'],
+            'course_id' => ['required', 'exists:courses,id'],
+            'format' => ['required', 'in:vor_ort,online'],
+            'start_date' => ['nullable', 'date'],
+            'comment' => ['nullable', 'string', 'max:500'],
+            'interests' => ['nullable', 'array'],
+            'interests.*' => ['exists:interests,id'],
+        ]);
+
+        $registration->update($validated);
+        $registration->interests()->sync($validated['interests'] ?? []);
+
+
+        return redirect()->route('registrations.index');
+    }
+
+    public function destroy(Registration $registration): RedirectResponse
+    {
+        $registration->delete();
+        return redirect()->route('registrations.index');
     }
 
     // Bestätigungsseite anzeigen: GET /registrations/danke

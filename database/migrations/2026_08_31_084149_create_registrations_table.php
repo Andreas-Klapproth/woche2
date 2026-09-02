@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('kurs');
-            $table->string('teilnahme');
-            $table->date('startdatum')->nullable();
-            $table->text('bemerkung')->nullable();
+            $table->string('course');
+            $table->string('format');
+            $table->date('start_date')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

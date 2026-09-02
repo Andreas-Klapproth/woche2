@@ -4,23 +4,92 @@ body {
     margin: 0;
 }
 
-/* --- Nav (wie tag2_p1) --- */
+/* --- Nav mit ul/li Struktur & Dropdown --- */
 nav {
+    background: #2b2d42;
+    padding: 0.5rem 1rem;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Haupt-Menüliste */
+.main-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     gap: 0.5rem;
-    background: #2b2d42;
-    padding: 0.75rem 1rem;
+    align-items: center;
 }
 
-nav a {
+.main-nav > li {
+    position: relative; /* Wichtig für die Ausrichtung */
+}
+
+/* Alle Links in der Nav */
+.main-nav a {
     color: #fff;
     text-decoration: none;
-    padding: 0.25rem 0.75rem;
+    padding: 0.4rem 0.75rem;
     border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
-nav a:hover  { background: #4f5d75; }
-nav a.active { background: #ef6461; }
+.main-nav a:hover {
+    background: #4f5d75;
+}
+
+.main-nav a.active {
+    background: #ef6461;
+}
+
+/* Pfeil für Links mit Untermenü */
+.main-nav > li:has(.submenu) > a::after {
+    content: "▼";
+    font-size: 0.6em;
+    opacity: 0.8;
+}
+
+/* --- Submenu (Kein Gap = Kein Flackern mehr) --- */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Bündig direkt unter dem Li ansetzen */
+    left: 0;
+    margin: 0; /* WICHTIG: Kein margin-top, damit kein Abstands-Loch entsteht */
+    padding: 0.4rem 0;
+    background: #2b2d42;
+    list-style: none;
+    min-width: 180px;
+    border-radius: 0 0 4px 4px; /* Unten abgerundet */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 1001;
+}
+
+/* Unsichtbare Brücke für maximale Stabilität */
+.submenu::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
+.submenu li a {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Aufklappen per Hover */
+.main-nav > li:hover .submenu {
+    display: block;
+}
 
 /* --- Mittiger Inhaltsbereich --- */
 main {
@@ -59,7 +128,10 @@ footer {
     margin-bottom: 0.75rem;
 }
 
-.card p { margin: 0; color: #555; }
+.card p {
+    margin: 0;
+    color: #555;
+}
 
 /* --- Formular /anmeldung: Felder untereinander, Breite gleich --- */
 form label {
@@ -102,7 +174,9 @@ button {
     cursor: pointer;
 }
 
-button:hover { background: #e67e00; }
+button:hover {
+    background: #e67e00;
+}
 
 /* --- Fehler: Liste oben (steht VOR dem Formular, deshalb main > ul) + Meldung am Feld --- */
 main > ul {
@@ -127,9 +201,78 @@ small {
     margin-top: 0.25rem;
 }
 
-.error{
+.error {
     background: #e67e00;
     padding: 7px;
     color: #c00;
     font-weight: bold;
+}
+
+/* Container für die Aktions-Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+/* Gemeinsames Basis-Styling für Buttons & Button-Links */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-sizing: border-box;
+    margin: 0; /* Überschreibt dein globales button-Margin */
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Bearbeiten-Button (Blau/Grau) */
+.btn-edit {
+    background-color: #4f5d75;
+    color: #ffffff;
+}
+
+.btn-edit:hover {
+    background-color: #2b2d42;
+    color: #ffffff;
+}
+
+/* Löschen-Button (Aktiv-Rot aus deiner Navbar) */
+.btn-delete {
+    background-color: #ef6461;
+    color: #ffffff;
+}
+
+.btn-delete:hover {
+    background-color: #b03a2e;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.info-grid dt {
+    font-weight: 600;
+    color: #2b2d42;
+}
+
+.info-grid dd {
+    margin: 0;
+    color: #555;
 }

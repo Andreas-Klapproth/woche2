@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         schema::table('registrations', function (Blueprint $table) {
-            $table->boolean('bezahlt')->default(false);
+            $table->boolean('payed')->default(false);
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         schema::table('registrations', function (Blueprint $table) {
-            $table->dropColumn('bezahlt');
+            $table->dropColumn('payed');
         });
     }
 };

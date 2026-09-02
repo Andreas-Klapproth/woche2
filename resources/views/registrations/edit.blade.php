@@ -1,23 +1,24 @@
-<x-layouts.app title="Anmeldung">
-    <h1>Kursanmeldung</h1>
+<x-layouts.app title="Anmeldung bearbeiten">
+    <h1>Kursanmeldung bearbeiten</h1>
 
     <x-forms.all-errors/>
 
     {{-- Formular über die neue Named Route 'registrations.store' --}}
-    <form action="{{ route('registrations.store') }}" method="POST" novalidate>
+    <form action="{{ route('registrations.update', $registration) }}" method="POST" novalidate>
         @csrf
+        @method('PUT')
 
         {{-- Vor- und Nachname --}}
         <div>
             <label for="name">Vor- und Nachname</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" id="name" name="name" value="{{ $registration->name }}">
             <x-forms.error name="name"/>
         </div>
 
         {{-- E-Mail --}}
         <div>
             <label for="email">E-Mail</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}">
+            <input type="email" id="email" name="email" value="{{ $registration->email  }}">
             <x-forms.error name="email"/>
         </div>
 
@@ -27,7 +28,7 @@
             <select id="course_id" name="course_id">
                 <option value="">-- bitte wählen --</option>
                 @foreach($courses as $course)
-                    <option value="{{ $course->id }}" @selected(old('course_id') == $course->id)>
+                    <option value="{{ $course->id }}" @selected($registration->course_id == $course->id)>
                         {{ $course->title }}
                     </option>
                 @endforeach
@@ -39,36 +40,27 @@
         <div>
             <p>Teilnahme</p>
             <label>
-                <input type="radio" name="format" value="vor_ort" @checked(old('format') === 'vor_ort')>
+                <input type="radio" name="format" value="vor_ort" @checked($registration->format === 'vor_ort')>
                 Vor Ort
             </label>
             <label>
-                <input type="radio" name="format" value="online" @checked(old('format') === 'online')>
+                <input type="radio" name="format" value="online" @checked($registration->format === 'online')>
                 Online
             </label>
             <x-forms.error name="format"/>
         </div>
 
-        {{-- Datenschutz --}}
-        <div>
-            <label>
-                <input type="checkbox" name="gdpr" value="1" @checked(old('gdpr'))>
-                Datenschutzbestimmungen akzeptieren
-            </label>
-            <x-forms.error name="gdpr"/>
-        </div>
-
         {{-- Wunsch-Startdatum --}}
         <div>
             <label for="start_date">Wunsch-Startdatum</label>
-            <input type="date" id="start_date" name="start_date" value="{{ old('start_date') }}">
+            <input type="date" id="start_date" name="start_date" value="{{ $registration->start_Date }}">
             <x-forms.error name="start_date"/>
         </div>
 
         {{-- Bemerkung --}}
         <div>
             <label for="comment">Bemerkung</label>
-            <textarea id="comment" name="comment">{{ old('comment') }}</textarea>
+            <textarea id="comment" name="comment">{{ $registration->comment }}</textarea>
             <x-forms.error name="comment"/>
         </div>
 
@@ -78,7 +70,7 @@
             @foreach($interests as $interest)
                 <label>
                     <input type="checkbox" name="interests[]" value="{{ $interest->id }}"
-                        @checked(in_array($interest->id, old('interests', [])))>
+                        @checked(in_array($interest->id, $registration->interests()->pluck('id')->toArray() ?? []))>
                     {{ $interest->name }}
                 </label>
             @endforeach

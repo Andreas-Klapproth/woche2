@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['name', 'email', 'course_id', 'teilnahme', 'startdatum', 'bemerkung'])]
+#[Fillable(['name', 'email', 'course_id', 'format', 'start_date', 'comment'])]
 class Registration extends Model
 {
+
+
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
@@ -21,6 +23,7 @@ class Registration extends Model
     }
 
     protected $casts = [
-        'startdatum' => 'date'
+        'start_date' => 'date'
     ];
 }
+

@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         Schema::table('registrations', function (Blueprint $table) {
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
-            $table->dropColumn('kurs');
+            $table->dropColumn('course');
         });
     }
 
@@ -23,7 +23,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('registrations', function (Blueprint $table) {
-            $table->string('kurs');
+            $table->string('course');
             $table->dropConstrainedForeignId('course_id');
         });
     }
