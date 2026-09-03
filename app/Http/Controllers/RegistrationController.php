@@ -16,7 +16,7 @@ class RegistrationController extends Controller
     // Übersicht aller Kurse: GET /registrations
     public function index(): View
     {
-        $registrations = Registration::latest('id')->get();
+        $registrations = Registration::latest('id')->simplePaginate(5);
         return view('registrations.index', compact('registrations'));
     }
 
@@ -102,7 +102,7 @@ class RegistrationController extends Controller
     public function destroy(Registration $registration): RedirectResponse
     {
         $registration->delete();
-        return redirect()->route('registrations.index');
+        return redirect()->route('registrations.index')->with('success', "Registration for \"{$registration->name}\" deleted successfully");
     }
 
     // Bestätigungsseite anzeigen: GET /registrations/danke

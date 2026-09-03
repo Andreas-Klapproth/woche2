@@ -276,3 +276,11 @@ small {
     margin: 0;
     color: #555;
 }
+
+.success {
+    background: #e6f4ea;
+    border: 1px solid #3f7551;
+    color: #20563a;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+}

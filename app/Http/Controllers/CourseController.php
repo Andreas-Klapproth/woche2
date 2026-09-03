@@ -11,13 +11,12 @@ class CourseController extends Controller
 {
     public function index(): View
     {
-        $courses = Course::all();
+        $courses = Course::orderBy('title')->simplePaginate(5);
         return view('courses.index', compact('courses'));
     }
 
     public function create(): View
     {
-        $courses = Course::all();
         return view('courses.create');
     }
 
@@ -61,7 +60,9 @@ class CourseController extends Controller
     {
         $course->delete();
 
-        return redirect()->route('courses.index');
+        return redirect()
+            ->route('courses.index')
+            ->with('success', "Course \"{$course->title}\" deleted successfully");
     }
 
 }

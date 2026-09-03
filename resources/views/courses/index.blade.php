@@ -8,4 +8,5 @@
     @empty
         <p>Momentan keine Kurse </p>
     @endforelse
+    {{ $courses->links() }}
 </x-layouts.app>
