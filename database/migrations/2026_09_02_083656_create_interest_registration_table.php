@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('interest_registration', function (Blueprint $table) {
-            $table->foreignId('interest_id')->constrained();
-            $table->foreignId('registration_id')->constrained();
+            $table->foreignId('interest_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('registration_id')->constrained()->cascadeOnDelete();
             $table->unique(['interest_id', 'registration_id']);
         });
     }
