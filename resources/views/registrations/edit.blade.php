@@ -1,7 +1,7 @@
 <x-layouts.app title="Anmeldung bearbeiten">
     <h1>Kursanmeldung bearbeiten</h1>
 
-    <x-forms.all-errors/>
+    <x-forms.error-overview/>
 
     {{-- Formular über die neue Named Route 'registrations.store' --}}
     <form action="{{ route('registrations.update', $registration) }}" method="POST" novalidate>

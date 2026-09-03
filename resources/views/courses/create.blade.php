@@ -2,7 +2,7 @@
 
     <h1> Neuen Kurs anlegen </h1>
 
-    <x-forms.all-errors/>
+    <x-forms.error-overview/>
 
 
     <form action="{{route('courses.store')}}" method="POST" novalidate>
